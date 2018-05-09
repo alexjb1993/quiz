@@ -1,0 +1,123 @@
+<doctype html>
+
+  <!--  Html file contatining visual layout and features for the phone quiz app -->
+
+
+  <!--  Adapted from: https://github.com/claireellul/cegeg077-week5app/tree/week6app -->
+
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <!-- Set the web page title -->
+    <title>UCL Treasure Hunt</title>
+
+    <!-- Add android homescreen -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add iOS homscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+
+<!-- Links to stylesheets for : https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+                          <!-- https://getmdl.io/styles/index.html -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.amber-orange.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Links to CSS and JavaScript files required for the Leaflet Map https://leafletjs.com/examples/quick-start/-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+	integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+	integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+	crossorigin=""></script>
+
+	<!-- links to custom icons used in the app -->
+	<link rel="stylesheet" href=" ionicons.min.css">
+	<link rel="stylesheet" href="leaflet.awesome-markers.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" 	crossorigin="anonymous">
+	<script src="leaflet.awesome-markers.js"></script>
+
+  <!-- Set the size of the map -->
+	<style>
+	#mapid { height: 100%;
+	width: 100%; }
+</style>
+
+</head>
+  <body>
+  <!-- Set the title bar and button features -->
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--cyan-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">UCL Treasure Hunt</span>
+          <div class="mdl-layout-spacer"></div>
+             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="b1" href=""onclick='location.reload();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i></button>
+             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="b1" href=""onclick='locTrack();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">my_location</i></button>
+    		     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="b2" href=""onclick='questGet();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">place</i></button>
+             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="b3" href=""onclick='questSelect();return false;'><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">beenhere</i></button>
+             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="b4"><i class="fab fa-github" id="git"></i></button>
+  <!-- Set the drop down menu features -->
+	          <ul class="mdl-menu mdl-js-menu mdl-color--grey-700 mdl-js-ripple-effect mdl-menu--bottom-right" for="b4">
+				<li class="mdl-menu__item"><a href="https://github.com/alexjb1993">Github</a></li>
+				<li class="mdl-menu__item"><a href="#" onclick="window.open('userguide.html', '_system');">User Guide</a></li>
+				<li class="mdl-menu__item"><a href="#" onclick="window.open('technicalguide.html', '_system');">Technical Guide</a></li>
+	          </ul>
+	        </div>
+      </header>
+
+    <!-- Set map box size -->
+    <main class="mdl-layout__content mdl-color--grey-100">
+	  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+		<div id="mapid" style="width: 100%; height: 100%;"></div>
+
+    <!-- Set the active questions page layout -->
+    <div id="ActiveQuestion" style ="display:none">
+
+		<textarea readonly id = "question" style="border: none; width:100%" ></textarea>
+        <textarea readonly id = "answera"></textarea>
+          <input type="radio" name="answer" id = radA value="1" checked="yes" /><br />
+        <textarea readonly id = "answerb"></textarea>
+          <input type="radio" name="answer" id = radB value="2"/><br />
+        <textarea readonly id = "answerc"></textarea>
+          <input type="radio" name="answer" id = radC value="3"/><br />
+        <textarea readonly id = "answerd"></textarea>
+          <input type="radio" name="answer" id = radD value="4"/><br />
+        <button id="questSubmit" onclick ="sendData()">Submit</button></div>
+    </div>
+	</main>
+  <!-- Call javascript files and API data into the index -->
+	<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<script src="js/appActivity.js"></script>
+
+</body>
+</html>
